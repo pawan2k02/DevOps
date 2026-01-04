@@ -1,10 +1,10 @@
 def call(Map config = [:]) {
-    String image        = config.get('image')
-    String tag          = config.get('tag', 'latest')
-    String credentials  = config.get('credentialsId')
+    String image       = config.get('image')
+    String tag         = config.get('tag', 'latest')
+    String credentials = config.get('credentialsId')
 
     if (!image) {
-        error "dockerBuildPush: 'image' is required (e.g. pawan630703/basic-server)"
+        error "dockerBuildPush: 'image' is required"
     }
     if (!credentials) {
         error "dockerBuildPush: 'credentialsId' is required"
@@ -20,8 +20,8 @@ def call(Map config = [:]) {
         ]) {
             sh """
                 echo "\$DOCKER_PASS" | docker login -u "\$DOCKER_USER" --password-stdin
-                docker build -t ${image}:${tag} .
-                docker push ${image}:${tag}
+                docker build -t \$DOCKER_USER/${image}:${tag} .
+                docker push \$DOCKER_USER/${image}:${tag}
                 docker logout
             """
         }
