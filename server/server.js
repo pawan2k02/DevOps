@@ -22,7 +22,9 @@ app.use("/api/v1/tasks", taskRoutes);
 
 // 4. Default Route
 app.get("/", (req, res) => {
-  res.send("PostgreSQL CRUD API is running...");
+  return res.status(200).json({
+    message: "PostgreSQL CRUD API is running..."
+  })
 });
 
 const PORT = process.env.PORT || 5000;
