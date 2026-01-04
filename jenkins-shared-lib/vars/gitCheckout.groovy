@@ -7,12 +7,10 @@ def call(Map config = [:]) {
     }
 
     script {
-        if (fileExists('.git')) {
-            echo "Git repo exists. Pulling latest changes..."
-            sh 'git pull origin ' + branch
-        } else {
-            echo "No git repo found. Cloning..."
-            git branch: branch, url: url
-        }
+        echo 'Cleaning workspace...'
+        deleteDir()
+
+        echo "Checking out ${branch} from ${url}"
+        git branch: branch, url: url
     }
 }
