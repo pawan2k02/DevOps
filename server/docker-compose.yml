@@ -1,6 +1,6 @@
 services:
   api:
-    build: pawan630703/basic-server:jenkins
+    image: pawan630703/basic-server:jenkins
     container_name: crud-server
     restart: always
     ports:
